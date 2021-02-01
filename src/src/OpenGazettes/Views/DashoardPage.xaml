@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="OpenGazettes.Views.DashoardPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="{Binding Title}">
+    <CollectionView
+        x:Name="MyCollectionView"
+        ItemsSource="{Binding CollectionList}"
+        SelectionChangedCommand="{Binding SelectedItemCommand}"
+        SelectionChangedCommandParameter="{Binding SelectedItem, Source={x:Reference MyCollectionView}}"
+        SelectionMode="Single">
+        <CollectionView.ItemTemplate>
+            <DataTemplate>
+
+                <StackLayout
+                    HeightRequest="75"
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="FillAndExpand">
+
+                    <Label
+                        FontAttributes="Bold"
+                        FontSize="20"
+                        HorizontalTextAlignment="Center"
+                        Text="{Binding Label}" />
+                </StackLayout>
+            </DataTemplate>
+        </CollectionView.ItemTemplate>
+    </CollectionView>
+</ContentPage>
