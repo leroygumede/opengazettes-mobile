@@ -12,6 +12,8 @@ namespace OpenGazettes.ViewModels
         public DelegateCommand NavigateToAboutCommand => new DelegateCommand(async () => await NavigateToAbout());
         public DelegateCommand NavigateToHomeCommand => new DelegateCommand(async () => await NavigateToHome());
 
+        public DelegateCommand NavigateToSearchCommand => new DelegateCommand(async () => await NavigateToSearch());
+
         #endregion
 
         #region Constructor
@@ -33,6 +35,11 @@ namespace OpenGazettes.ViewModels
         public async Task NavigateToHome()
         {
             await NavigationService.NavigateAsync("MainMenuPage/NavigationPage/DashoardPage");
+        }
+
+        public async Task NavigateToSearch()
+        {
+            await NavigationService.NavigateAsync("MainMenuPage/NavigationPage/SearchPage");
         }
 
         #endregion

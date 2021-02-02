@@ -32,7 +32,7 @@ namespace OpenGazettes
             containerRegistry.RegisterForNavigation<OpenGazettesPage, OpenGazettesPageViewModel>();
             containerRegistry.RegisterForNavigation<ViewFacetPage, ViewFacetPageViewModel>();
             containerRegistry.RegisterForNavigation<AboutPage, AboutPageViewModel>();
-
+            containerRegistry.RegisterForNavigation<SearchPage, SearchPageViewModel>();
             RegisterServices(containerRegistry);
         }
 

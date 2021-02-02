@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="OpenGazettes.Views.SearchPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView">
+    <StackLayout>
+        <StackLayout
+            Orientation="Horizontal">
+            <SearchBar
+                Text="{Binding SearchText}" />
+            <Button
+                Text="Search"
+                Command="{Binding SearchCommand}" />
+        </StackLayout>
+
+        <CollectionView
+            x:Name="MyCollectionView"
+            ItemsSource="{Binding CollectionList}"
+            SelectionChangedCommand="{Binding SelectedItemCommand}"
+            SelectionChangedCommandParameter="{Binding SelectedItem, Source={x:Reference MyCollectionView}}"
+            SelectionMode="Single">
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <yummy:PancakeView
+                        BackgroundColor="#bc91d7"
+                        CornerRadius="60,0,0,60"
+                        HorizontalOptions="FillAndExpand"
+                        HeightRequest="150">
+                        <StackLayout>
+                            <Label
+                                Text="{Binding Label}"
+                                HorizontalTextAlignment="Center" />
+                            <Image
+                                Source="{Binding Label, Converter={StaticResource countryToImageConverter}}"
+                                HorizontalOptions="FillAndExpand"
+                                VerticalOptions="FillAndExpand"
+                                Aspect="AspectFill" />
+                        </StackLayout>
+                    </yummy:PancakeView>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </StackLayout>
+</ContentPage>

@@ -18,10 +18,8 @@
         SelectionChangedCommand="{Binding SelectedItemCommand}"
         SelectionChangedCommandParameter="{Binding SelectedItem, Source={x:Reference MyCollectionView}}"
         SelectionMode="Single">
-
         <CollectionView.ItemTemplate>
             <DataTemplate>
-
                 <yummy:PancakeView
                     BackgroundColor="#bc91d7"
                     CornerRadius="60,0,0,60"
@@ -37,7 +35,6 @@
                             VerticalOptions="FillAndExpand"
                             Aspect="AspectFill" />
                     </StackLayout>
-
                 </yummy:PancakeView>
             </DataTemplate>
         </CollectionView.ItemTemplate>

@@ -6,12 +6,11 @@ using Prism.Navigation;
 using Prism.Services;
 using System;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
 using System.Threading.Tasks;
 
 namespace OpenGazettes.ViewModels
 {
-    public class DashoardPageViewModel : ViewModelBase
+    public class SearchPageViewModel : ViewModelBase
     {
         #region Services
 
@@ -25,32 +24,27 @@ namespace OpenGazettes.ViewModels
 
         #region Commands
 
-        public DelegateCommand<object> ButtonNavigationCommand => new DelegateCommand<object>(async (path) => await NavigateToPage(path));
+        public DelegateCommand SearchCommand => new DelegateCommand(async () => await Search());
         public DelegateCommand<object> SelectedItemCommand => new DelegateCommand<object>(async (obj) => await ItemSelected(obj));
 
         #endregion Commands
 
-        #region Constructor
-
-        public DashoardPageViewModel(INavigationService navigationService, IPageDialogService pageDialogService, IGazetteService gazetteService)
+        public SearchPageViewModel(INavigationService navigationService, IPageDialogService pageDialogService, IGazetteService gazetteService)
     : base(navigationService, pageDialogService)
         {
             _gazetteService = gazetteService;
             Title = "Open Gazette";
         }
 
-        #endregion
-
         #region Methods
 
-        public async Task NavigateToPage(object path)
+        public async Task Search()
         {
             try
             {
                 var np = new NavigationParameters
-                    {
-                        { "location", path.ToString()}
-                    };
+                {
+                };
                 await NavigationService.NavigateAsync("GazettesPage", np);
             }
             catch (Exception ex)
@@ -76,7 +70,7 @@ namespace OpenGazettes.ViewModels
             }
         }
 
-        public async Task GetCollection()
+        public async Task GetCollection(string search)
         {
             try
             {
@@ -98,7 +92,6 @@ namespace OpenGazettes.ViewModels
 
         public async override void OnNavigatedTo(INavigationParameters parameters)
         {
-            await GetCollection();
         }
 
         #endregion Navigation
