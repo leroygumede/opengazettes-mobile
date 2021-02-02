@@ -1,7 +1,6 @@
 ﻿using OpenGazettes.Models;
 using Refit;
 using System.Threading.Tasks;
-using static OpenGazettes.Models.CollectionResponse;
 
 namespace OpenGazettes.Services.Api
 {
@@ -14,8 +13,6 @@ namespace OpenGazettes.Services.Api
         Task<CollectionResponse> GetCollections();
 
         [Get("/query")]
-        Task<SearchResponse> QueryFacet(QueryRequest queryRequest);
-
-        //Task<SearchResponse> QueryFacet([Body(BodySerializationMethod.UrlEncoded)] QueryRequest queryRequest);
+        Task<SearchResponse> Query(QueryRequest queryRequest);
     }
 }

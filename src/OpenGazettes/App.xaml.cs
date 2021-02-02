@@ -18,16 +18,18 @@ namespace OpenGazettes
         protected override async void OnInitialized()
         {
             InitializeComponent();
-
-            await NavigationService.NavigateAsync("NavigationPage/DashoardPage");
+            await NavigationService.NavigateAsync("/MainMenuPage/NavigationPage/DashoardPage");
         }
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
             containerRegistry.RegisterForNavigation<NavigationPage>();
+            containerRegistry.RegisterForNavigation<MainMenuPage, MainMenuPageViewModel>();
+            containerRegistry.RegisterForNavigation<MainPage, MainPageViewModel>();
             containerRegistry.RegisterForNavigation<DashoardPage, DashoardPageViewModel>();
             containerRegistry.RegisterForNavigation<GazettesPage, GazettesPageViewModel>();
             containerRegistry.RegisterForNavigation<GazetteDetailsPage, GazetteDetailsPageViewModel>();
+            containerRegistry.RegisterForNavigation<OpenGazettesPage, OpenGazettesPageViewModel>();
 
             RegisterServices(containerRegistry);
         }

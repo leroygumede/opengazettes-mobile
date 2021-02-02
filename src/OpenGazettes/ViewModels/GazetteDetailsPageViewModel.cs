@@ -17,6 +17,7 @@ namespace OpenGazettes.ViewModels
 
         #endregion Services
 
+        //public ObservableCollection<Models.GazetteGroup> GazetteList { get; private set; } = new ObservableCollection<Models.GazetteGroup>();
         public SearchResult SelectedGazette { get; set; }
 
         public string SourceWebView { get; set; }
@@ -39,6 +40,11 @@ namespace OpenGazettes.ViewModels
         {
             try
             {
+                //var item = (Result)obj;
+                //var np = new NavigationParameters
+                //    {
+                //        { "gazette", item}
+                //    };
                 await NavigationService.NavigateAsync("GazetteDetailsPage");
             }
             catch (Exception ex)
@@ -46,6 +52,48 @@ namespace OpenGazettes.ViewModels
                 await PageDialogService.DisplayAlertAsync(Dialog.Error, ex.Message, Dialog.Ok);
             }
         }
+
+        //public async Task GetMonths(Models.GazetteMonths months)
+        //{
+        //    try
+        //    {
+        //        //var result = await _gazetteService.All();
+        //        //if (result != null)
+        //        //{
+        //        //    GazetteList.Add(new Models.GazetteGroup("2020", 20, new System.Collections.Generic.List<Models.GazetteMonths>
+        //        //    {
+        //        //        new Models.GazetteMonths
+        //        //        {
+        //        //            Label = "Jan",
+        //        //            Count = 10
+        //        //        },
+        //        //        new Models.GazetteMonths
+        //        //        {
+        //        //            Label = "Feb",
+        //        //            Count = 10
+        //        //        }
+        //        //    }));
+
+        //        //    GazetteList.Add(new Models.GazetteGroup("2019", 100, new System.Collections.Generic.List<Models.GazetteMonths>
+        //        //    {
+        //        //        new Models.GazetteMonths
+        //        //        {
+        //        //            Label = "Jan",
+        //        //            Count = 50
+        //        //        },
+        //        //        new Models.GazetteMonths
+        //        //        {
+        //        //            Label = "Feb",
+        //        //            Count = 50
+        //        //        }
+        //        //    }));
+        //        //}
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        await PageDialogService.DisplayAlertAsync(Dialog.Error, ex.Message, Dialog.Ok);
+        //    }
+        //}
 
         #region Navigation
 
@@ -59,7 +107,15 @@ namespace OpenGazettes.ViewModels
                     Title = gazette.Title;
                     SelectedGazette = gazette;
                     SourceWebView = "https://docs.google.com/viewer?url=" + SelectedGazette.SourceUrl;
+                    //await GetMonths(SelectedMonth);
                 }
+
+                //var SelectedMonth = parameters["Month"] as Models.GazetteMonths;
+                //if (SelectedMonth != null)
+                //{
+                //    Title = SelectedMonth.Label;
+                //    //await GetMonths(SelectedMonth);
+                //}
             }
             else
             {

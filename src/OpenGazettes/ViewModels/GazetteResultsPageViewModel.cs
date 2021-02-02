@@ -62,7 +62,8 @@ namespace OpenGazettes.ViewModels
 
         public async Task Search(string path)
         {
-            var result = await _gazetteService.FacetSearch(path);
+            //var test2 = @"""KwaZulu-Natal Provincial Gazette vol"" AND ""September 2016""";
+            var result = await _gazetteService.QuerySearch(path);
 
             if (result != null)
             {

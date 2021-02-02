@@ -6,7 +6,6 @@ using Prism.Navigation;
 using Prism.Services;
 using System;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
 using System.Threading.Tasks;
 
 namespace OpenGazettes.ViewModels
@@ -22,12 +21,15 @@ namespace OpenGazettes.ViewModels
 
         #endregion Services
 
-        public ObservableCollection<Models.GazetteGroup> GazetteList { get; private set; } = new ObservableCollection<Models.GazetteGroup>();
+        public ObservableCollection<Value> PublicationDatesList { get; set; } = new ObservableCollection<Value>();
         public GazetteResult SelectedGazette { get; set; }
 
         #region Commands
 
-        public DelegateCommand SearchDateCommand => new DelegateCommand(async () => await SearchDate());
+        public DelegateCommand ViewPhoneNumbersCommand => new DelegateCommand(async () => await ViewPhoneNumbers());
+        public DelegateCommand ViewEmailAddressCommand => new DelegateCommand(async () => await ViewEmailAddress());
+        public DelegateCommand ViewDomainsCommand => new DelegateCommand(async () => await ViewDomains());
+        public DelegateCommand<object> SelectedItemCommand => new DelegateCommand<object>(async (obj) => await ItemSelected(obj));
 
         #endregion Commands
 
@@ -38,11 +40,29 @@ namespace OpenGazettes.ViewModels
             SelectedDate = DateTime.Now;
         }
 
-        public async Task SearchDate()
+        #region Methods
+
+        public async Task ViewPhoneNumbers()
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task ViewEmailAddress()
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task ViewDomains()
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task ItemSelected(object obj)
         {
             try
             {
-                var date = SelectedDate.ToString("MMMM yyyy");
+                var item = (Value)obj;
+                var date = DateTime.Parse(item.Label).ToString("MMMM yyyy");
                 var name = GetUntilOrEmpty(SelectedGazette.Label, " Gazettes") + " Gazette vol";
                 var searchParam = @"""" + name + @""" AND """ + date + @"""";
                 var np = new NavigationParameters
@@ -72,6 +92,21 @@ namespace OpenGazettes.ViewModels
             return String.Empty;
         }
 
+        public async Task GetPublicstions()
+        {
+            try
+            {
+                var result = await _gazetteService.FacetSearch("publication_date", Convert.ToInt32(SelectedGazette.Id));
+                PublicationDatesList = new ObservableCollection<Value>(result.Facets.PublicationDate.Values);
+            }
+            catch (Exception ex)
+            {
+                await PageDialogService.DisplayAlertAsync(Dialog.Error, ex.Message, Dialog.Ok);
+            }
+        }
+
+        #endregion
+
         #region Navigation
 
         public async override void OnNavigatedTo(INavigationParameters parameters)
@@ -82,11 +117,8 @@ namespace OpenGazettes.ViewModels
                 if (SelectedGazette != null)
                 {
                     Title = SelectedGazette.Label;
+                    await GetPublicstions();
                 }
-            }
-            else
-            {
-                await NavigationService.GoBackAsync();
             }
         }
 

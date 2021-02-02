@@ -1,8 +1,6 @@
 ﻿using OpenGazettes.Models;
-using Refit;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using static OpenGazettes.Models.CollectionResponse;
 
 namespace OpenGazettes.Services.Interfaces
 {
@@ -14,6 +12,8 @@ namespace OpenGazettes.Services.Interfaces
 
         Task<List<GazetteGroup>> FilterByYears(GazetteResult gazette);
 
-        Task<SearchResponse> FacetSearch(string searchKey);
+        Task<SearchResponse> FacetSearch(string facet, int collectionId);
+
+        Task<SearchResponse> QuerySearch(string query);
     }
 }

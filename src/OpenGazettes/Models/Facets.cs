@@ -1,7 +1,4 @@
 ﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace OpenGazettes.Models
 {
@@ -12,5 +9,8 @@ namespace OpenGazettes.Models
 
         [JsonProperty("collections")]
         public Collections Collections { get; set; }
+
+        [JsonProperty("publication_date")]
+        public PublicationDate PublicationDate { get; set; }
     }
 }

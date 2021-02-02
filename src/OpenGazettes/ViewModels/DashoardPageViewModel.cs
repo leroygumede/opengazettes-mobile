@@ -19,7 +19,9 @@ namespace OpenGazettes.ViewModels
 
         #endregion Services
 
+        #region Events
         public ObservableCollection<GazetteResult> CollectionList { get; set; }
+        #endregion
 
         #region Commands
 
@@ -32,10 +34,12 @@ namespace OpenGazettes.ViewModels
             : base(navigationService, pageDialogService)
         {
             _gazetteService = gazetteService;
-            Title = "Main Page";
+            Title = "Open Gazette";
 
             ButtonNavigationCommand = new DelegateCommand<object>(async (path) => await NavigateToPage(path));
         }
+
+        #region Methods
 
         public async Task NavigateToPage(object path)
         {
@@ -74,11 +78,10 @@ namespace OpenGazettes.ViewModels
         {
             try
             {
-                var result = await _gazetteService.GetAllCountries();
-                Debug.WriteLine(result);
-                if (result != null)
+                var results = await _gazetteService.GetAllCountries();
+                if (results != null)
                 {
-                    CollectionList = new ObservableCollection<GazetteResult>(result.Results);
+                    CollectionList = new ObservableCollection<GazetteResult>(results.Results);
                 }
             }
             catch (Exception ex)
@@ -86,6 +89,8 @@ namespace OpenGazettes.ViewModels
                 await PageDialogService.DisplayAlertAsync(Dialog.Error, ex.Message, Dialog.Ok);
             }
         }
+
+        #endregion
 
         #region Navigation
 

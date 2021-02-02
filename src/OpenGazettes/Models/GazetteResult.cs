@@ -1,7 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace OpenGazettes.Models
 {
@@ -41,7 +40,7 @@ namespace OpenGazettes.Models
         public bool Public { get; set; }
 
         [JsonProperty("creator_id")]
-        public long CreatorId { get; set; }
+        public string CreatorId { get; set; }
 
         [JsonProperty("$schema")]
         public string Schema { get; set; }
@@ -50,6 +49,6 @@ namespace OpenGazettes.Models
         public object DeletedAt { get; set; }
 
         [JsonProperty("id")]
-        public long Id { get; set; }
+        public string Id { get; set; }
     }
 }

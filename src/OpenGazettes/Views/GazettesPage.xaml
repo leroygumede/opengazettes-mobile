@@ -5,34 +5,54 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:prism="http://prismlibrary.com"
     x:Name="GazettesCurrentPage"
-    Title="{Binding Title}"
-    prism:ViewModelLocator.AutowireViewModel="True">
-    <ScrollView>
+    Title="{Binding Title}">
+    <StackLayout>
+        <Image
+            Aspect="AspectFill"
+            Source="https://sncdn.com/imagecache/db/id/817119/1772947a.jpg" />
+
         <StackLayout>
-            <Image
-                Aspect="AspectFill"
-                Source="https://sncdn.com/imagecache/db/id/817119/1772947a.jpg" />
-
-            <StackLayout>
-                <Button
-                    Text="Phone Numbers" />
-                <Button
-                    Text="Email Addresses" />
-            </StackLayout>
-
-            <StackLayout
-                Orientation="Horizontal">
-                <Label
-                    Text="Search Month and year"
-                    VerticalOptions="CenterAndExpand" />
-                <DatePicker
-                    Date="{Binding SelectedDate}" />
-                <Button
-                    Text="Search"
-                    Command="{Binding SearchDateCommand}" />
-            </StackLayout>
+            <Button
+                Text="Phone Numbers"
+                Command="{Binding ViewPhoneNumbersCommand}" />
+            <Button
+                Text="Email Addresses"
+                Command="{Binding ViewEmailAddressCommand}" />
+            <Button
+                Text="Domains"
+                Command="{Binding ViewDomainsCommand}" />
         </StackLayout>
-    </ScrollView>
+
+        <Label
+            Text="Publication Dates" />
+
+        <Grid
+            RowDefinitions="*, Auto">
+            <CollectionView
+                x:Name="MyCollectionView"
+                ItemsSource="{Binding PublicationDatesList}"
+                SelectionChangedCommand="{Binding SelectedItemCommand}"
+                SelectionChangedCommandParameter="{Binding SelectedItem, Source={x:Reference MyCollectionView}}"
+                SelectionMode="Single">
+
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout
+                            Orientation="Horizontal">
+                            <Label
+                                Text="{Binding Label}"
+                                TextColor="Red" />
+                            <Label
+                                Text="{Binding Count}"
+                                TextColor="Red" />
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+
+        </Grid>
+    </StackLayout>
 
     <!--<CollectionView
         x:Name="MyCollectionView"

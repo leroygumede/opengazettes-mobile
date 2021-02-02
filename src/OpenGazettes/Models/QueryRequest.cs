@@ -6,6 +6,7 @@ namespace OpenGazettes.Models
     public class QueryRequest
     {
         [JsonProperty("facet")]
+        [AliasAs("facet")]
         public string Facet { get; set; }
 
         [JsonProperty("limit")]
@@ -23,5 +24,9 @@ namespace OpenGazettes.Models
 
         [JsonProperty("sort")]
         public string Sort { get; set; }
+
+        [JsonProperty("filter:collection_id")]
+        [AliasAs("filter:collection_id")]
+        public int Filter { get; set; }
     }
 }

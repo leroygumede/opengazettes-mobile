@@ -3,7 +3,6 @@ using OpenGazettes.Models;
 using OpenGazettes.Services.Api;
 using OpenGazettes.Services.Interfaces;
 using Refit;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -12,10 +11,6 @@ namespace OpenGazettes.Services.Implementation
 {
     public class GazetteService : IGazetteService
     {
-        //public GazetteService(IHttpService httpService) => _httpService = httpService;
-
-        //readonly IHttpService _httpService;
-
         #region Services
         readonly IGazetteApi _api;
         #endregion
@@ -48,10 +43,6 @@ namespace OpenGazettes.Services.Implementation
             return grouped3;
         }
 
-        //public CollectionService(IHttpService httpService) => _httpService = httpService;
-
-        //public async Task<CollectionResponse> GetCollections() => await _httpService.CollectionServiceApi.GetCollections();
-
         public async Task<string> GetAll()
         {
             var results = await _api.GetAll();
@@ -83,25 +74,34 @@ namespace OpenGazettes.Services.Implementation
             return result;
         }
 
-        public async Task<SearchResponse> FacetSearch(string searchKey)
+        public async Task<SearchResponse> FacetSearch(string facet, int collectionId)
+        {
+            var param = new QueryRequest
+            {
+                Facet = facet,
+                Limit = 20,
+                Offset = 0,
+                Snippet = 140,
+                Sort = "score",
+                Filter = collectionId
+            };
+            var results = await _api.Query(param);
+            return results;
+        }
+
+        public async Task<SearchResponse> QuerySearch(string query)
         {
             var param = new QueryRequest
             {
                 Facet = "entities",
                 Limit = 20,
                 Offset = 0,
-                Query = searchKey,
+                Query = query,
                 Snippet = 140,
                 Sort = "score"
             };
-            var results = await _api.QueryFacet(param);
+            var results = await _api.Query(param);
             return results;
         }
-
-        //===
-
-        // public CollectionService(IHttpService httpService) => _httpService = httpService;
-
-        // public async Task<CollectionResponse> GetCollections() => await _httpService.CollectionServiceApi.GetCollections();
     }
 }
