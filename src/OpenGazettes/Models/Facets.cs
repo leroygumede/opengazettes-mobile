@@ -12,5 +12,14 @@ namespace OpenGazettes.Models
 
         [JsonProperty("publication_date")]
         public PublicationDate PublicationDate { get; set; }
+
+        [JsonProperty("phone_numbers")]
+        public PublicationDate PhoneNumbers { get; set; }
+
+        [JsonProperty("emails")]
+        public PublicationDate EmailAddress { get; set; }
+
+        [JsonProperty("domains")]
+        public PublicationDate Domains { get; set; }
     }
 }

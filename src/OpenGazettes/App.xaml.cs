@@ -30,6 +30,8 @@ namespace OpenGazettes
             containerRegistry.RegisterForNavigation<GazettesPage, GazettesPageViewModel>();
             containerRegistry.RegisterForNavigation<GazetteDetailsPage, GazetteDetailsPageViewModel>();
             containerRegistry.RegisterForNavigation<OpenGazettesPage, OpenGazettesPageViewModel>();
+            containerRegistry.RegisterForNavigation<ViewFacetPage, ViewFacetPageViewModel>();
+            containerRegistry.RegisterForNavigation<AboutPage, AboutPageViewModel>();
 
             RegisterServices(containerRegistry);
         }

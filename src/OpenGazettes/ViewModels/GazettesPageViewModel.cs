@@ -14,15 +14,15 @@ namespace OpenGazettes.ViewModels
     {
         #region Events
         public DateTime SelectedDate { get; set; }
+        public ObservableCollection<Value> PublicationDatesList { get; set; } = new ObservableCollection<Value>();
+        public GazetteResult SelectedGazette { get; set; }
         #endregion
+
         #region Services
 
         readonly IGazetteService _gazetteService;
 
         #endregion Services
-
-        public ObservableCollection<Value> PublicationDatesList { get; set; } = new ObservableCollection<Value>();
-        public GazetteResult SelectedGazette { get; set; }
 
         #region Commands
 
@@ -33,6 +33,8 @@ namespace OpenGazettes.ViewModels
 
         #endregion Commands
 
+        #region Constructor
+
         public GazettesPageViewModel(INavigationService navigationService, IPageDialogService pageDialogService, IGazetteService gazetteService)
             : base(navigationService, pageDialogService)
         {
@@ -40,21 +42,44 @@ namespace OpenGazettes.ViewModels
             SelectedDate = DateTime.Now;
         }
 
+        #endregion
+
         #region Methods
 
         public async Task ViewPhoneNumbers()
         {
-            throw new NotImplementedException();
+            var param = new NavigationParameters
+            {
+                {"Title" , "Phone Numbers" },
+                {"Facet" , "phone_numbers" },
+                {"CollectionId", SelectedGazette.Id },
+                {"SelectionType","Phone" }
+            };
+            await NavigationService.NavigateAsync("ViewFacetPage", param);
         }
 
         public async Task ViewEmailAddress()
         {
-            throw new NotImplementedException();
+            var param = new NavigationParameters
+            {
+                {"Title" , "Email Addressess" },
+                {"Facet" , "emails" },
+                {"CollectionId", SelectedGazette.Id },
+                {"SelectionType","Email" }
+            };
+            await NavigationService.NavigateAsync("ViewFacetPage", param);
         }
 
         public async Task ViewDomains()
         {
-            throw new NotImplementedException();
+            var param = new NavigationParameters
+            {
+                {"Title" , "Domains" },
+                {"Facet" , "domains" },
+                {"CollectionId", SelectedGazette.Id },
+                {"SelectionType","Website" }
+            };
+            await NavigationService.NavigateAsync("ViewFacetPage", param);
         }
 
         public async Task ItemSelected(object obj)
