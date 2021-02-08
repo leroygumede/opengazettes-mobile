@@ -15,5 +15,7 @@ namespace OpenGazettes.Services.Interfaces
         Task<SearchResponse> FacetSearch(string facet, int collectionId);
 
         Task<SearchResponse> QuerySearch(string query);
+
+        Task<byte[]> DownloadPdf(string path);
     }
 }

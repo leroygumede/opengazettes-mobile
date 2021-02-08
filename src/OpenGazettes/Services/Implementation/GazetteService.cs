@@ -5,6 +5,7 @@ using OpenGazettes.Services.Interfaces;
 using Refit;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace OpenGazettes.Services.Implementation
@@ -87,6 +88,14 @@ namespace OpenGazettes.Services.Implementation
             };
             var results = await _api.Query(param);
             return results;
+        }
+
+        public async Task<byte[]> DownloadPdf(string path)
+        {
+            HttpContent content = await _api.DownloadFile(path);
+            byte[] bytes = await content.ReadAsByteArrayAsync();
+
+            return bytes;
         }
 
         public async Task<SearchResponse> QuerySearch(string query)

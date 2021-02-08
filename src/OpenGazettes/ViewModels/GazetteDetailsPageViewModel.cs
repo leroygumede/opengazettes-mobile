@@ -17,7 +17,6 @@ namespace OpenGazettes.ViewModels
 
         #endregion Services
 
-        //public ObservableCollection<Models.GazetteGroup> GazetteList { get; private set; } = new ObservableCollection<Models.GazetteGroup>();
         public SearchResult SelectedGazette { get; set; }
 
         public string SourceWebView { get; set; }
@@ -40,11 +39,6 @@ namespace OpenGazettes.ViewModels
         {
             try
             {
-                //var item = (Result)obj;
-                //var np = new NavigationParameters
-                //    {
-                //        { "gazette", item}
-                //    };
                 await NavigationService.NavigateAsync("GazetteDetailsPage");
             }
             catch (Exception ex)
@@ -99,28 +93,17 @@ namespace OpenGazettes.ViewModels
 
         public async override void OnNavigatedTo(INavigationParameters parameters)
         {
-            if (parameters.ContainsKey("gazette"))
-            {
-                var gazette = parameters["gazette"] as SearchResult;
-                if (gazette != null)
-                {
-                    Title = gazette.Title;
-                    SelectedGazette = gazette;
-                    SourceWebView = "https://docs.google.com/viewer?url=" + SelectedGazette.SourceUrl;
-                    //await GetMonths(SelectedMonth);
-                }
+            //if (parameters.ContainsKey("gazette"))
+            //{
+            //    var gazette = parameters["gazette"] as SearchResult;
+            //    if (gazette != null)
+            //    {
+            //        Title = gazette.Title;
+            //        SelectedGazette = gazette;
+            //        SourceWebView = "https://docs.google.com/viewer?url=" + SelectedGazette.SourceUrl;
 
-                //var SelectedMonth = parameters["Month"] as Models.GazetteMonths;
-                //if (SelectedMonth != null)
-                //{
-                //    Title = SelectedMonth.Label;
-                //    //await GetMonths(SelectedMonth);
-                //}
-            }
-            else
-            {
-                await NavigationService.GoBackAsync();
-            }
+            //    }
+            //}
         }
 
         #endregion Navigation

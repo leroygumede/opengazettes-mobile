@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TabbedPage
+    x:Class="OpenGazettes.Views.MetaTabbedPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:OpenGazettes.Views;assembly=OpenGazettes"
+    Title="{Binding Title}">
+    <local:GazetteDetailsPage
+        Title="PDF"
+        BindingContext="{Binding ChildrenfirstViewModel, Mode=TwoWay}" />
+    <local:MetadataPage
+        Title="MetaData"
+        BindingContext="{Binding ChildrensecondViewModel, Mode=TwoWay}" />
+</TabbedPage>

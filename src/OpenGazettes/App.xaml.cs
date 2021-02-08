@@ -33,7 +33,9 @@ namespace OpenGazettes
             containerRegistry.RegisterForNavigation<ViewFacetPage, ViewFacetPageViewModel>();
             containerRegistry.RegisterForNavigation<AboutPage, AboutPageViewModel>();
             containerRegistry.RegisterForNavigation<SearchPage, SearchPageViewModel>();
+            containerRegistry.RegisterForNavigation<MetadataPage, MetadataPageViewModel>();
             RegisterServices(containerRegistry);
+            containerRegistry.RegisterForNavigation<MetaTabbedPage, MetaTabbedPageViewModel>();
         }
 
         public void RegisterServices(IContainerRegistry containerRegistry)

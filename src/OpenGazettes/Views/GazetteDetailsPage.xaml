@@ -3,13 +3,18 @@
     x:Class="OpenGazettes.Views.GazetteDetailsPage"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:converters="clr-namespace:OpenGazettes.Converters;assembly=OpenGazettes"
     Title="{Binding Title}">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:ViewerUrlConverter
+                x:Key="viewerUrlConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <StackLayout>
-        <Label
-            Text="{Binding SelectedGazette.Title}" />
         <WebView
             VerticalOptions="FillAndExpand"
             HorizontalOptions="FillAndExpand"
-            Source="{Binding SourceWebView}" />
+            Source="{Binding SearchResult.SourceUrl, Converter={StaticResource viewerUrlConverter}}" />
     </StackLayout>
 </ContentPage>

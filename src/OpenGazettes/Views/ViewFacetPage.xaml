@@ -3,6 +3,7 @@
     x:Class="OpenGazettes.Views.ViewFacetPage"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
     Title="{Binding Title}">
     <CollectionView
         x:Name="MyCollectionView"
@@ -12,11 +13,20 @@
         SelectionMode="Single">
         <CollectionView.ItemTemplate>
             <DataTemplate>
-                <StackLayout
-                    Orientation="Horizontal">
-                    <Label
-                        Text="{Binding Label}"
-                        TextColor="Red" />
+                <StackLayout>
+                    <yummy:PancakeView
+                        Margin="10"
+                        Padding="10"
+                        CornerRadius="10"
+                        Shadow="{yummy:ShadowMarkup Color=#FF0000,
+                                                    Offset='10,10'}"
+                        BackgroundColor="White">
+                        <StackLayout>
+                            <Label
+                                FontSize="15"
+                                Text="{Binding Label}" />
+                        </StackLayout>
+                    </yummy:PancakeView>
                 </StackLayout>
             </DataTemplate>
         </CollectionView.ItemTemplate>

@@ -98,7 +98,8 @@ namespace OpenGazettes.ViewModels
 
         public async override void OnNavigatedTo(INavigationParameters parameters)
         {
-            await GetCollection();
+            if (CollectionList == null)
+                await GetCollection();
         }
 
         #endregion Navigation

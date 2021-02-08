@@ -52,7 +52,7 @@ namespace OpenGazettes.ViewModels
                     {
                         { "gazette", item}
                     };
-                await NavigationService.NavigateAsync("GazetteDetailsPage", np);
+                await NavigationService.NavigateAsync("MetaTabbedPage", np);
             }
             catch (Exception ex)
             {
@@ -84,10 +84,6 @@ namespace OpenGazettes.ViewModels
                 {
                     await Search(SelectedMonth);
                 }
-            }
-            else
-            {
-                await NavigationService.GoBackAsync();
             }
         }
 

@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="OpenGazettes.Views.MetadataPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:prism="http://prismlibrary.com"
+    prism:ViewModelLocator.AutowireViewModel="True">
+    <ScrollView>
+        <StackLayout>
+            <StackLayout>
+                <Label
+                    Text="FileName" />
+                <Label
+                    Text="{Binding SearchResult.FileName}" />
+            </StackLayout>
+
+            <StackLayout>
+                <Label
+                    Text="CreatedAt" />
+                <Label
+                    Text="{Binding SearchResult.CreatedAt}" />
+            </StackLayout>
+
+            <StackLayout>
+                <Label
+                    Text="Type" />
+                <Label
+                    Text="{Binding SearchResult.type}" />
+            </StackLayout>
+
+            <!--<Button
+                Text="Download"
+                Command="{Binding DownloadFileCommand}" />-->
+        </StackLayout>
+    </ScrollView>
+</ContentPage>

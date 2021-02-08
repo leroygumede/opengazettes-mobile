@@ -3,7 +3,7 @@
     x:Class="OpenGazettes.Views.GazettesPage"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:prism="http://prismlibrary.com"
+    xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
     x:Name="GazettesCurrentPage"
     Title="{Binding Title}">
     <StackLayout>
@@ -11,19 +11,56 @@
             Aspect="AspectFill"
             Source="https://sncdn.com/imagecache/db/id/817119/1772947a.jpg" />
 
-        <StackLayout>
-            <Button
-                Text="Phone Numbers"
-                Command="{Binding ViewPhoneNumbersCommand}" />
-            <Button
-                Text="Email Addresses"
-                Command="{Binding ViewEmailAddressCommand}" />
-            <Button
-                Text="Domains"
-                Command="{Binding ViewDomainsCommand}" />
-        </StackLayout>
+        <yummy:PancakeView
+            Margin="10,-30,10,10"
+            CornerRadius="10"
+            Shadow="{yummy:ShadowMarkup Color=#FF0000,
+                                        Offset='10,10'}"
+            BackgroundColor="White">
+
+            <Grid
+                Padding="10"
+                ColumnDefinitions="*, *, *"
+                RowDefinitions="Auto">
+
+                <Image
+                    Grid.Column="0"
+                    Source="https://www.pinclipart.com/picdir/big/422-4221679_png-file-wind-icon-png-clipart.png"
+                    WidthRequest="31"
+                    HeightRequest="31">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer
+                            Command="{Binding ViewPhoneNumbersCommand}" />
+                    </Image.GestureRecognizers>
+                </Image>
+
+                <Image
+                    Grid.Column="1"
+                    Source="https://www.pinclipart.com/picdir/big/422-4221679_png-file-wind-icon-png-clipart.png"
+                    WidthRequest="31"
+                    HeightRequest="31">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer
+                            Command="{Binding ViewEmailAddressCommand}" />
+                    </Image.GestureRecognizers>
+                </Image>
+
+                <Image
+                    Grid.Column="2"
+                    Source="https://www.pinclipart.com/picdir/big/422-4221679_png-file-wind-icon-png-clipart.png"
+                    WidthRequest="31"
+                    HeightRequest="31">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer
+                            Command="{Binding ViewDomainsCommand}" />
+                    </Image.GestureRecognizers>
+                </Image>
+            </Grid>
+        </yummy:PancakeView>
 
         <Label
+            Margin="10"
+            FontSize="20"
             Text="Publication Dates" />
 
         <Grid
@@ -37,14 +74,24 @@
 
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <StackLayout
-                            Orientation="Horizontal">
-                            <Label
-                                Text="{Binding Label}"
-                                TextColor="Red" />
-                            <Label
-                                Text="{Binding Count}"
-                                TextColor="Red" />
+
+                        <StackLayout>
+                            <yummy:PancakeView
+                                Margin="10"
+                                Padding="10"
+                                CornerRadius="10"
+                                Shadow="{yummy:ShadowMarkup Color=#FF0000,
+                                                            Offset='10,10'}"
+                                BackgroundColor="White">
+                                <StackLayout>
+                                    <Label
+                                        FontSize="15"
+                                        Text="{Binding Label}" />
+                                    <Label
+                                        FontSize="10"
+                                        Text="{Binding Count}" />
+                                </StackLayout>
+                            </yummy:PancakeView>
                         </StackLayout>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
