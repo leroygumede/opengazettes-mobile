@@ -1,4 +1,5 @@
-﻿using Prism.Mvvm;
+﻿using OpenGazettes.Models;
+using Prism.Mvvm;
 using Prism.Navigation;
 using Prism.Services;
 
@@ -10,6 +11,7 @@ namespace OpenGazettes.ViewModels
         protected IPageDialogService PageDialogService { get; private set; }
 
         private string _title;
+        public LoadStatus Loading { get; set; }
 
         public string Title
         {

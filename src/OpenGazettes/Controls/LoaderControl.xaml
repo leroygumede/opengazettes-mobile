@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<StackLayout
+    x:Class="OpenGazettes.Controls.LoaderControl"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Name="this">
+    <Image
+        IsVisible="{Binding EnableLoader, Source={x:Reference this}}"
+        Source="loadingcontent.gif"
+        IsAnimationPlaying="True" />
+    <StackLayout
+        IsVisible="{Binding EnableNoContent, Source={x:Reference this}}">
+        <Label
+            Margin="10"
+            FontAttributes="Bold"
+            FontSize="Large"
+            HorizontalOptions="Fill"
+            HorizontalTextAlignment="Center"
+            Text="No Files Found" />
+        <Label
+            Grid.Row="2"
+            Grid.Column="0"
+            HorizontalOptions="Fill"
+            HorizontalTextAlignment="Center"
+            Text="Maybe go back and try a different collection"
+            FontSize="Small" />
+    </StackLayout>
+</StackLayout>

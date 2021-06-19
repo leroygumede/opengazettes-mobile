@@ -121,11 +121,22 @@ namespace OpenGazettes.ViewModels
         {
             try
             {
-                var result = await _gazetteService.FacetSearch("publication_date", Convert.ToInt32(SelectedGazette.Id));
-                PublicationDatesList = new ObservableCollection<Value>(result.Facets.PublicationDate.Values);
+                Loading = LoadStatus.Loading;
+                var results = await _gazetteService.FacetSearch("publication_date", Convert.ToInt32(SelectedGazette.Id));
+
+                if (results != null && results.Results.Count >= 1)
+                {
+                    Loading = LoadStatus.None;
+                    PublicationDatesList = new ObservableCollection<Value>(results.Facets.PublicationDate.Values);
+                }
+                else
+                {
+                    Loading = LoadStatus.Empty;
+                }
             }
             catch (Exception ex)
             {
+                Loading = LoadStatus.Empty;
                 await PageDialogService.DisplayAlertAsync(Dialog.Error, ex.Message, Dialog.Ok);
             }
         }

@@ -6,6 +6,7 @@ using Refit;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace OpenGazettes.Services.Implementation
@@ -20,7 +21,16 @@ namespace OpenGazettes.Services.Implementation
 
         public GazetteService(IHttpService httpService)
         {
-            _api = RestService.For<IGazetteApi>(httpService?.Client);
+            var options = new JsonSerializerOptions()
+            {
+                PropertyNameCaseInsensitive = true,
+                PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+                WriteIndented = true,
+            };
+
+            var settings = new RefitSettings(new NewtonsoftJsonContentSerializer());
+
+            _api = RestService.For<IGazetteApi>(httpService?.Client, settings);
         }
 
         #endregion
@@ -48,18 +58,6 @@ namespace OpenGazettes.Services.Implementation
         {
             var results = await _api.GetAll();
             results = results.Insert(0, "[").Insert(results.Length, "]").Replace("\n", "").Replace("}{", "},{");
-            // var res = JsonConvert.SerializeObject(results);
-
-            // var mock = "[{\"archive_url\":
-            // \"https://archive.opengazettes.org.za/archive/ZA-NW/2015/provincial-gazette-ZA-NW-vol-258-no-7533-dated-2015-09-08.pdf\",
-            // \"original_uri\": null, \"unique_id\": \"provincial-gazette-ZA-NW-vol-258-no-7533\",
-            // \"pagecount\": 4, \"publication_date\": \"2019-09-08\", \"publication_subtitle\":
-            // null, \"issue_number\": 7533, \"language_edition\": null, \"volume_number\": \"258\",
-            // \"jurisdiction_code\": \"ZA-NW\", \"special_issue\": null, \"archive_path\":
-            // \"ZA-NW/2015/provincial-gazette-ZA-NW-vol-258-no-7533-dated-2015-09-08.pdf\",
-            // \"jurisdiction_name\": \"North West\", \"publication_title\": \"Provincial Gazette\",
-            // \"issue_title\": \"North West Provincial Gazette vol 258 no 7533 dated 08 September 2015\"},{\"archive_url\":
-
             return results;
         }
 

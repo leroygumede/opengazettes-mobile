@@ -62,12 +62,24 @@ namespace OpenGazettes.ViewModels
 
         public async Task Search(string path)
         {
-            //var test2 = @"""KwaZulu-Natal Provincial Gazette vol"" AND ""September 2016""";
-            var result = await _gazetteService.QuerySearch(path);
-
-            if (result != null)
+            try
             {
-                CollectionList = new ObservableCollection<SearchResult>(result.Results);
+                Loading = LoadStatus.Loading;
+                var results = await _gazetteService.QuerySearch(path);
+                if (results != null && results.Results.Count >= 1)
+                {
+                    Loading = LoadStatus.None;
+                    CollectionList = new ObservableCollection<SearchResult>(results.Results);
+                }
+                else
+                {
+                    Loading = LoadStatus.Empty;
+                }
+            }
+            catch (Exception ex)
+            {
+                Loading = LoadStatus.Empty;
+                await PageDialogService.DisplayAlertAsync(Dialog.Error, ex.Message, Dialog.Ok);
             }
         }
 

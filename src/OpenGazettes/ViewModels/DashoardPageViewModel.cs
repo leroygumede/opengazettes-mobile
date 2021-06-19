@@ -6,7 +6,6 @@ using Prism.Navigation;
 using Prism.Services;
 using System;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
 using System.Threading.Tasks;
 
 namespace OpenGazettes.ViewModels
@@ -21,12 +20,14 @@ namespace OpenGazettes.ViewModels
 
         #region Events
         public ObservableCollection<GazetteResult> CollectionList { get; set; }
+        public GazetteResult SelectedItem { get; set; }
+
         #endregion
 
         #region Commands
 
         public DelegateCommand<object> ButtonNavigationCommand => new DelegateCommand<object>(async (path) => await NavigateToPage(path));
-        public DelegateCommand<object> SelectedItemCommand => new DelegateCommand<object>(async (obj) => await ItemSelected(obj));
+        public DelegateCommand<object> SelectedItemCommand => new DelegateCommand<object>(async (selectedItem) => await ItemSelected(selectedItem));
 
         #endregion Commands
 
@@ -80,14 +81,21 @@ namespace OpenGazettes.ViewModels
         {
             try
             {
+                Loading = LoadStatus.Loading;
                 var results = await _gazetteService.GetAllCountries();
-                if (results != null)
+                if (results != null && results.Results.Count >= 1)
                 {
+                    Loading = LoadStatus.None;
                     CollectionList = new ObservableCollection<GazetteResult>(results.Results);
+                }
+                else
+                {
+                    Loading = LoadStatus.Empty;
                 }
             }
             catch (Exception ex)
             {
+                Loading = LoadStatus.Empty;
                 await PageDialogService.DisplayAlertAsync(Dialog.Error, ex.Message, Dialog.Ok);
             }
         }

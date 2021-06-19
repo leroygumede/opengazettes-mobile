@@ -47,23 +47,32 @@ namespace OpenGazettes.ViewModels
         {
             try
             {
+                Loading = LoadStatus.Loading;
                 var result = await _gazetteService.FacetSearch(facet, collectionId);
-
-                if (SelectionType == "Phone")
+                if (result != null)
                 {
-                    FacetList = new ObservableCollection<Value>(result.Facets.PhoneNumbers.Values);
+                    if (SelectionType == "Phone")
+                    {
+                        FacetList = new ObservableCollection<Value>(result.Facets.PhoneNumbers.Values);
+                    }
+                    else if (SelectionType == "Email")
+                    {
+                        FacetList = new ObservableCollection<Value>(result.Facets.EmailAddress.Values);
+                    }
+                    else if (SelectionType == "Website")
+                    {
+                        FacetList = new ObservableCollection<Value>(result.Facets.Domains.Values);
+                    }
+                    Loading = LoadStatus.None;
                 }
-                else if (SelectionType == "Email")
+                else
                 {
-                    FacetList = new ObservableCollection<Value>(result.Facets.EmailAddress.Values);
-                }
-                else if (SelectionType == "Website")
-                {
-                    FacetList = new ObservableCollection<Value>(result.Facets.Domains.Values);
+                    Loading = LoadStatus.Empty;
                 }
             }
             catch (Exception ex)
             {
+                Loading = LoadStatus.Empty;
                 await PageDialogService.DisplayAlertAsync(Dialog.Error, ex.Message, Dialog.Ok);
             }
         }

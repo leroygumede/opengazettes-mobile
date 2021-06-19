@@ -18,7 +18,7 @@ namespace OpenGazettes.Models
         public object NextUrl { get; set; }
 
         [JsonProperty("facets")]
-        public Facets FFacets { get; set; }
+        public Facets Facets { get; set; }
 
         [JsonProperty("total")]
         public long Total { get; set; }

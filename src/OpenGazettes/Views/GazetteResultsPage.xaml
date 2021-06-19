@@ -4,34 +4,49 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+        xmlns:converters="clr-namespace:OpenGazettes.Converters;assembly=OpenGazettes"
+    xmlns:controls="clr-namespace:OpenGazettes.Controls"
     Title="{Binding Title}">
-    <CollectionView
-        x:Name="MyCollectionView"
-        ItemsSource="{Binding CollectionList}"
-        SelectionChangedCommand="{Binding SelectedItemCommand}"
-        SelectionChangedCommandParameter="{Binding SelectedItem, Source={x:Reference MyCollectionView}}"
-        SelectionMode="Single">
-        <CollectionView.ItemTemplate>
-            <DataTemplate>
-                <StackLayout>
-                    <yummy:PancakeView
-                        Margin="10"
-                        Padding="10"
-                        CornerRadius="5"
-                        Shadow="{yummy:ShadowMarkup Color=#FF0000,
-                                                    Offset='10,10'}"
-                        BackgroundColor="White">
-                        <StackLayout>
-                            <Label
-                                FontSize="15"
-                                Text="{Binding FileName}" />
-                        </StackLayout>
-                    </yummy:PancakeView>
-                </StackLayout>
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:CountryToImageConverter
+                x:Key="countryToImageConverter" />
+            <converters:ObjectToBooleanConverter
+                x:Key="objectToBooleanConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <StackLayout>
 
+        <controls:LoaderControl
+            Status="{Binding Loading}"
+            VerticalOptions="FillAndExpand" />
 
-
-            </DataTemplate>
-        </CollectionView.ItemTemplate>
-    </CollectionView>
+        <CollectionView
+                x:Name="MyCollectionView"
+                IsVisible="{Binding CollectionList, Converter={StaticResource objectToBooleanConverter}}"
+                ItemsSource="{Binding CollectionList}"
+                SelectionChangedCommand="{Binding SelectedItemCommand}"
+                SelectionChangedCommandParameter="{Binding SelectedItem, Source={x:Reference MyCollectionView}}"
+                SelectionMode="Single">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <StackLayout>
+                        <yummy:PancakeView
+                                Margin="10"
+                                Padding="10"
+                                CornerRadius="5"
+                                Shadow="{yummy:ShadowMarkup Color=#FF0000,
+                                                            Offset='10,10'}"
+                                BackgroundColor="White">
+                            <StackLayout>
+                                <Label
+                                        FontSize="15"
+                                        Text="{Binding FileName}" />
+                            </StackLayout>
+                        </yummy:PancakeView>
+                    </StackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </StackLayout>
 </ContentPage>

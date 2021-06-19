@@ -1,11 +1,34 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<prism:PrismApplication xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:prism="http://prismlibrary.com"
-             x:Class="OpenGazettes.App">
-  <Application.Resources>
+<prism:PrismApplication
+    x:Class="OpenGazettes.App"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:prism="http://prismlibrary.com">
+    <Application.Resources>
 
-    <!-- Application resource dictionary -->
+        <Color
+            x:Key="Primary1">
+            #000119
+        </Color>
+        <Color
+            x:Key="Primary2">
+            #E3001A
+        </Color>
 
-  </Application.Resources>
+        <Style
+            x:Key="LabelTitle"
+            TargetType="Label">
+            <Setter Property="TextColor" Value="{StaticResource Primary1}" />
+            <Setter Property="HorizontalTextAlignment" Value="Start" />
+            <Setter Property="FontSize" Value="Large" />
+        </Style>
+
+        <Style
+            x:Key="LabelLink"
+            TargetType="Label">
+            <Setter Property="TextColor" Value="{StaticResource Primary2}" />
+            <Setter Property="FontSize" Value="Default" />
+        </Style>
+
+    </Application.Resources>
 </prism:PrismApplication>

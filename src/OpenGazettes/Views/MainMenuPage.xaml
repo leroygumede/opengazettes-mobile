@@ -2,46 +2,44 @@
 <MasterDetailPage
     x:Class="OpenGazettes.Views.MainMenuPage"
     xmlns="http://xamarin.com/schemas/2014/forms"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Padding="20"
+    BackgroundColor="White">
     <MasterDetailPage.Master>
         <ContentPage
-            Title="Menu"
-            BackgroundColor="Red">
-            <ScrollView>
-                <StackLayout>
-                    <StackLayout>
-                        <Grid
-                            Padding="10,5"
-                            ColumnDefinitions="*, 5*">
-                            <Label
-                                Text="Home"
-                                TextColor="White"
-                                VerticalOptions="Center"
-                                VerticalTextAlignment="Center" />
-                        </Grid>
-                        <StackLayout.GestureRecognizers>
-                            <TapGestureRecognizer
-                                Command="{Binding NavigateToHomeCommand}" />
-                        </StackLayout.GestureRecognizers>
-                    </StackLayout>
+            Title="Menu">
 
-                    <StackLayout>
-                        <Grid
-                            Padding="10,5"
-                            ColumnDefinitions="*, 5*">
-                            <Label
-                                Text="About"
-                                TextColor="White"
-                                VerticalOptions="Center"
-                                VerticalTextAlignment="Center" />
-                        </Grid>
-                        <StackLayout.GestureRecognizers>
-                            <TapGestureRecognizer
-                                Command="{Binding NavigateToAboutCommand}" />
-                        </StackLayout.GestureRecognizers>
-                    </StackLayout>
+            <StackLayout
+                Margin="50">
+                <StackLayout>
+
+                    <Label
+                        FontSize="20"
+                        Text="Home"
+                        VerticalOptions="Center"
+                        VerticalTextAlignment="Center" />
+
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer
+                            Command="{Binding NavigateToHomeCommand}" />
+                    </StackLayout.GestureRecognizers>
                 </StackLayout>
-            </ScrollView>
+
+                <StackLayout>
+
+                    <Label
+                        Text="About"
+                        FontSize="20"
+                        VerticalOptions="Center"
+                        VerticalTextAlignment="Center" />
+
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer
+                            Command="{Binding NavigateToAboutCommand}" />
+                    </StackLayout.GestureRecognizers>
+                </StackLayout>
+            </StackLayout>
+
         </ContentPage>
     </MasterDetailPage.Master>
 </MasterDetailPage>

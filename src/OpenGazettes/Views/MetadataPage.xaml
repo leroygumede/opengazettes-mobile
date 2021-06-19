@@ -6,9 +6,11 @@
     xmlns:prism="http://prismlibrary.com"
     prism:ViewModelLocator.AutowireViewModel="True">
     <ScrollView>
-        <StackLayout>
+        <StackLayout
+            Padding="10">
             <StackLayout>
                 <Label
+                    Style="{StaticResource LabelTitle}"
                     Text="FileName" />
                 <Label
                     Text="{Binding SearchResult.FileName}" />
@@ -16,16 +18,10 @@
 
             <StackLayout>
                 <Label
-                    Text="CreatedAt" />
+                    Style="{StaticResource LabelTitle}"
+                    Text="Created At" />
                 <Label
                     Text="{Binding SearchResult.CreatedAt}" />
-            </StackLayout>
-
-            <StackLayout>
-                <Label
-                    Text="Type" />
-                <Label
-                    Text="{Binding SearchResult.type}" />
             </StackLayout>
 
             <!--<Button
