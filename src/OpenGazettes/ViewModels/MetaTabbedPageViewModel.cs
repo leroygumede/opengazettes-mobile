@@ -30,8 +30,8 @@ namespace OpenGazettes.ViewModels
                 if (gazette != null)
                 {
                     Title = gazette.Title;
-                    ChildrenfirstViewModel.Text = "2";
-                    ChildrensecondViewModel.Text = "3";
+                    ChildrenfirstViewModel.Text = "1";
+                    ChildrensecondViewModel.Text = "2";
 
                     ChildrenfirstViewModel.SearchResult = gazette;
                     ChildrensecondViewModel.SearchResult = gazette;

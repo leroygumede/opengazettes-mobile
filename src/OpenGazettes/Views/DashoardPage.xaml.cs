@@ -6,13 +6,14 @@ namespace OpenGazettes.Views
     {
         public DashoardPage()
         {
-            try
+            InitializeComponent();
+        }
+
+        public void CollectionView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (MyCollectionView.SelectedItem != null)
             {
-                InitializeComponent();
-            }
-            catch (System.Exception ex)
-            {
-                throw;
+                MyCollectionView.SelectedItem = null;
             }
         }
     }

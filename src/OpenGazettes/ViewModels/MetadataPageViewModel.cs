@@ -1,12 +1,9 @@
 ﻿using OpenGazettes.Models;
 using OpenGazettes.Services.Interfaces;
 using Prism.Commands;
-using Prism.Mvvm;
 using Prism.Navigation;
 using Prism.Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+using System.Diagnostics;
 using System.Threading.Tasks;
 
 namespace OpenGazettes.ViewModels
@@ -29,14 +26,15 @@ namespace OpenGazettes.ViewModels
     : base(navigationService, pageDialogService)
         {
             _gazetteService = gazetteService;
-            Title = "Meta data";
+            Title = "Meta data2";
         }
 
         #region Methods
 
-        public Task DownloadFile(string path)
+        public async Task DownloadFile(string path)
         {
-            throw new NotImplementedException();
+            var file = await _gazetteService.DownloadPdf(path);
+            Debug.WriteLine(file);
         }
 
         #endregion
@@ -48,9 +46,6 @@ namespace OpenGazettes.ViewModels
             if (parameters.ContainsKey("gazette"))
             {
                 var gazette = parameters["gazette"] as SearchResult;
-                if (gazette != null)
-                {
-                }
             }
         }
 

@@ -27,7 +27,7 @@ namespace OpenGazettes.ViewModels
         #region Commands
 
         public DelegateCommand<object> ButtonNavigationCommand => new DelegateCommand<object>(async (path) => await NavigateToPage(path));
-        public DelegateCommand<object> SelectedItemCommand => new DelegateCommand<object>(async (selectedItem) => await ItemSelected(selectedItem));
+        public DelegateCommand<GazetteResult> SelectedItemCommand => new DelegateCommand<GazetteResult>(async (selectedItem) => await ItemSelected(selectedItem));
 
         #endregion Commands
 
@@ -60,16 +60,18 @@ namespace OpenGazettes.ViewModels
             }
         }
 
-        public async Task ItemSelected(object obj)
+        public async Task ItemSelected(GazetteResult gazetteResult)
         {
             try
             {
-                var item = (GazetteResult)obj;
-                var np = new NavigationParameters
+                if (gazetteResult != null)
+                {
+                    var np = new NavigationParameters
                     {
-                        { "gazette", item}
+                        { "gazette", gazetteResult}
                     };
-                await NavigationService.NavigateAsync("GazettesPage", np);
+                    await NavigationService.NavigateAsync("GazettesPage", np);
+                }
             }
             catch (Exception ex)
             {

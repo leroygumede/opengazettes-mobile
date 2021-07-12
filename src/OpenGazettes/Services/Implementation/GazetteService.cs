@@ -4,6 +4,7 @@ using OpenGazettes.Services.Api;
 using OpenGazettes.Services.Interfaces;
 using Refit;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Text.Json;
@@ -109,6 +110,18 @@ namespace OpenGazettes.Services.Implementation
             };
             var results = await _api.Query(param);
             return results;
+        }
+
+        public async Task<Stream> DownloadPdfNative(string url)
+        {
+            HttpClient httpClient = new HttpClient();
+            HttpResponseMessage response = await httpClient.GetAsync(url);
+            if ((int)response.StatusCode == 302)
+            {
+                HttpResponseMessage redirectedResponse = await httpClient.GetAsync(response.Headers.Location.AbsoluteUri);
+                return await redirectedResponse.Content.ReadAsStreamAsync();
+            }
+            return await response.Content.ReadAsStreamAsync();
         }
     }
 }

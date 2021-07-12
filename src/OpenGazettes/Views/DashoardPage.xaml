@@ -26,19 +26,20 @@
             ItemsSource="{Binding CollectionList}"
             SelectionChangedCommand="{Binding SelectedItemCommand}"
             SelectionChangedCommandParameter="{Binding SelectedItem, Source={x:Reference MyCollectionView}}"
+            SelectionChanged="CollectionView_SelectionChanged"
             SelectionMode="Single">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
                     <StackLayout
-                        Margin="10"
-                        Padding="15">
+                        Margin="1"
+                        Padding="12">
                         <yummy:PancakeView
                             CornerRadius="10"
                             Shadow="{yummy:ShadowMarkup Color=#FF0000,
                                                         Offset='10,10'}"
                             BackgroundColor="White"
                             HorizontalOptions="FillAndExpand"
-                            HeightRequest="80">
+                            HeightRequest="60">
                             <StackLayout
                                 HorizontalOptions="FillAndExpand"
                                 VerticalOptions="FillAndExpand"

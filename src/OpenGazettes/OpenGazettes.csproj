@@ -5,11 +5,22 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Assets\provincial.pdf" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Assets\provincial.pdf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Com.Airbnb.Xamarin.Forms.Lottie" Version="4.0.9" />
     <PackageReference Include="HttpTracer" Version="2.1.1" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="PropertyChanged.Fody" Version="3.3.3" />
     <PackageReference Include="refit" Version="5.2.4" />
+    <PackageReference Include="Syncfusion.Xamarin.SfPdfViewer" Version="19.2.0.46" />
     <PackageReference Include="Xamarin.Essentials" Version="1.6.1" />
     <PackageReference Include="Xamarin.FFImageLoading" Version="2.4.11.982" />
     <PackageReference Include="Xamarin.FFImageLoading.Forms" Version="2.4.11.982" />

@@ -71,6 +71,9 @@
     <PackageReference Include="PropertyChanged.Fody">
       <Version>3.3.3</Version>
     </PackageReference>
+    <PackageReference Include="Syncfusion.Xamarin.SfPdfViewer">
+      <Version>19.2.0.46</Version>
+    </PackageReference>
     <PackageReference Include="Xamarin.Essentials">
       <Version>1.6.1</Version>
     </PackageReference>
@@ -90,6 +93,7 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Dependencies\LocalFile.cs" />
     <Compile Include="MainApplication.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="SplashActivity.cs" />
@@ -99,6 +103,9 @@
   <ItemGroup>
     <AndroidAsset Include="Assets\emptylist.json" />
     <AndroidAsset Include="Assets\loadingcontent.json" />
+    <EmbeddedResource Include="Assets\provincial.pdf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
     <None Include="Resources\AboutResources.txt" />
     <None Include="Assets\AboutAssets.txt" />
   </ItemGroup>
@@ -174,6 +181,7 @@
     <AndroidResource Include="Resources\xml\network_security_config.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </AndroidResource>
+    <AndroidResource Include="Resources\xml\file_paths.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <ProjectExtensions>

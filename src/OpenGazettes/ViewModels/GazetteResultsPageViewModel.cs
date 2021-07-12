@@ -52,7 +52,7 @@ namespace OpenGazettes.ViewModels
                     {
                         { "gazette", item}
                     };
-                await NavigationService.NavigateAsync("MetaTabbedPage", np);
+                await NavigationService.NavigateAsync("GazetteDetailsPage", np);
             }
             catch (Exception ex)
             {

@@ -1,6 +1,8 @@
 ﻿using Android.App;
 using Android.Content.PM;
 using Android.OS;
+using OpenGazettes.Dependencies;
+using OpenGazettes.Droid.Dependencies;
 using Prism;
 using Prism.Ioc;
 
@@ -10,6 +12,8 @@ namespace OpenGazettes.Droid
               ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation | ConfigChanges.UiMode | ConfigChanges.ScreenLayout | ConfigChanges.SmallestScreenSize)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
+        public static LocalFile LocalFiles { get; set; }
+
         protected override void OnCreate(Bundle savedInstanceState)
         {
             TabLayoutResource = Resource.Layout.Tabbar;
@@ -18,7 +22,7 @@ namespace OpenGazettes.Droid
             base.OnCreate(savedInstanceState);
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
-
+            LocalFiles = new LocalFile(this);
             FFImageLoading.Forms.Platform.CachedImageRenderer.Init(true);
 
             LoadApplication(new App(new AndroidInitializer()));
@@ -37,6 +41,7 @@ namespace OpenGazettes.Droid
         public void RegisterTypes(IContainerRegistry containerRegistry)
         {
             // Register any platform specific implementations
+            containerRegistry.RegisterInstance<ILocalFile>(MainActivity.LocalFiles);
         }
     }
 }

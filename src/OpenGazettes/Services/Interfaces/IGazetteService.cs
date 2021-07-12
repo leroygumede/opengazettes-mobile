@@ -1,5 +1,6 @@
 ﻿using OpenGazettes.Models;
 using System.Collections.Generic;
+using System.IO;
 using System.Threading.Tasks;
 
 namespace OpenGazettes.Services.Interfaces
@@ -17,5 +18,7 @@ namespace OpenGazettes.Services.Interfaces
         Task<SearchResponse> QuerySearch(string query);
 
         Task<byte[]> DownloadPdf(string path);
+
+        Task<Stream> DownloadPdfNative(string url);
     }
 }
